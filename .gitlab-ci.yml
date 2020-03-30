@@ -1,0 +1,11 @@
+build:
+  image: debian:sid
+  stage: build
+  before_script:
+    - apt-get update
+    - apt-get install -y build-essential cmake gnuradio-dev python3-dev swig libboost-dev
+  script:
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make -j4
