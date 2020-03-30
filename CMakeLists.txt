@@ -24,6 +24,10 @@ cmake_minimum_required(VERSION 3.8)
 project(gr-noaa CXX C)
 enable_testing()
 
+if(NOT CMAKE_MODULES_DIR)
+  set(CMAKE_MODULES_DIR lib${LIB_SUFFIX}/cmake)
+endif(NOT CMAKE_MODULES_DIR)
+
 # Install to PyBOMBS target prefix if defined
 if(DEFINED ENV{PYBOMBS_PREFIX})
     set(CMAKE_INSTALL_PREFIX $ENV{PYBOMBS_PREFIX})
@@ -99,6 +103,18 @@ SET(GR_PKG_NOAA_EXAMPLES_DIR ${GR_PKG_DATA_DIR}/examples/noaa)
 #    DESCRIPTION  "SWIG development .i files"
 #    DEPENDS      "runtime_swig;noaa_python;noaa_devel"
 #)
+
+########################################################################
+# Create uninstall target
+########################################################################
+configure_file(
+    ${CMAKE_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake
+@ONLY)
+
+add_custom_target(uninstall
+    ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake
+    )
 
 ########################################################################
 # Add subdirectories
