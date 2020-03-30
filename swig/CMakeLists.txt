@@ -20,16 +20,20 @@
 ########################################################################
 # Setup swig generation
 ########################################################################
-include(GrPython)
+find_package(SWIG)
+find_package(PythonLibs)
+if(NOT SWIG_FOUND OR NOT PYTHONLIBS_FOUND)
+    return()
+endif()
 include(GrSwig)
+include(GrPython)
 
 set(GR_SWIG_INCLUDE_DIRS
-    "${CMAKE_CURRENT_SOURCE_DIR}/../include"
-    ${GR_NOAA_INCLUDE_DIRS}
-    ${GNURADIO_RUNTIME_SWIG_INCLUDE_DIRS}
-    ${Boost_INCLUDE_DIRS}
-    $<TARGET_PROPERTY:runtime_swig,INCLUDE_DIRECTORIES>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include> 
+    $<TARGET_PROPERTY:gnuradio::runtime_swig,INTERFACE_INCLUDE_DIRECTORIES>
 )
+
+set(GR_SWIG_TARGET_DEPS gnuradio::runtime_swig)
 
 if(ENABLE_GR_CTRLPORT)
   list(APPEND GR_SWIG_FLAGS "-DGR_CTRLPORT")
@@ -46,7 +50,6 @@ GR_SWIG_MAKE(noaa_swig noaa_swig.i)
 GR_SWIG_INSTALL(
     TARGETS noaa_swig
     DESTINATION ${GR_PYTHON_DIR}/gnuradio/noaa
-    COMPONENT "noaa_python"
 )
 
 install(
@@ -54,5 +57,4 @@ install(
     noaa_swig.i
     ${CMAKE_CURRENT_BINARY_DIR}/noaa_swig_doc.i
     DESTINATION ${GR_INCLUDE_DIR}/gnuradio/swig
-    COMPONENT "noaa_swig"
 )

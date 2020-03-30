@@ -18,8 +18,31 @@
 # Boston, MA 02110-1301, USA.
 
 ########################################################################
+# Project setup
+########################################################################
+cmake_minimum_required(VERSION 3.8)
+project(gr-noaa CXX C)
+enable_testing()
+
+# Install to PyBOMBS target prefix if defined
+if(DEFINED ENV{PYBOMBS_PREFIX})
+    set(CMAKE_INSTALL_PREFIX $ENV{PYBOMBS_PREFIX})
+    message(STATUS "PyBOMBS installed GNU Radio. Setting CMAKE_INSTALL_PREFIX to $ENV{PYBOMBS_PREFIX}")
+endif()
+
+########################################################################
 # Setup dependencies
 ########################################################################
+find_package(Gnuradio "3.8" COMPONENTS runtime blocks)
+if(NOT Gnuradio_FOUND)
+    find_package(Gnuradio "3.9" COMPONENTS runtime blocks)
+	if(NOT Gnuradio_FOUND)
+	    message(FATAL_ERROR "Unable to find GNURadio 3.8 or 3.9")
+	ENDIF(NOT Gnuradio_FOUND)
+ENDIF(NOT Gnuradio_FOUND)
+
+include(GrVersion)
+include(GrPlatform)
 include(GrBoost)
 
 ########################################################################
@@ -42,11 +65,6 @@ GR_REGISTER_COMPONENT("gr-noaa" ENABLE_GR_NOAA
 #)
 
 SET(GR_PKG_NOAA_EXAMPLES_DIR ${GR_PKG_DATA_DIR}/examples/noaa)
-
-########################################################################
-# Begin conditional configuration
-########################################################################
-if(ENABLE_GR_NOAA)
 
 ########################################################################
 # Setup CPack components
@@ -108,5 +126,3 @@ install(
     FILES ${CMAKE_CURRENT_BINARY_DIR}/gnuradio-noaa.pc
     DESTINATION ${GR_LIBRARY_DIR}/pkgconfig
 )
-
-endif(ENABLE_GR_NOAA)

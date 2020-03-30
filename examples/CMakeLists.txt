@@ -25,5 +25,4 @@ INSTALL(
     usrp_rx_hrpt.grc
     usrp_rx_hrpt_nogui.grc
     DESTINATION ${GR_PKG_NOAA_EXAMPLES_DIR}
-    COMPONENT "noaa_python"
 )

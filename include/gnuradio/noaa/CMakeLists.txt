@@ -27,5 +27,4 @@ install(FILES
     hrpt.h
     hrpt_pll_cf.h
     DESTINATION ${GR_INCLUDE_DIR}/gnuradio/noaa
-    COMPONENT "noaa_devel"
 )

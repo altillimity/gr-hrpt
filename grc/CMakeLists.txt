@@ -22,5 +22,4 @@ install(FILES
     noaa_hrpt_deframer.block.yml
     noaa_hrpt_pll_cf.block.yml
     DESTINATION share/gnuradio/grc/blocks
-    COMPONENT "noaa_python"
 )
