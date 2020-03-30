@@ -1,0 +1,28 @@
+id: noaa_hrpt_pll_cf
+label: HRPT PLL
+category: '[Core]/NOAA'
+
+parameters:
+-   id: alpha
+    label: Alpha
+    dtype: real
+-   id: beta
+    label: Beta
+    dtype: real
+-   id: max_offset
+    label: Max Offset
+    dtype: real
+
+inputs:
+-   domain: stream
+    dtype: complex
+
+outputs:
+-   domain: stream
+    dtype: float
+
+templates:
+    imports: from gnuradio import noaa
+    make: noaa.hrpt_pll_cf(${alpha}, ${beta}, ${max_offset})
+
+file_format: 1
