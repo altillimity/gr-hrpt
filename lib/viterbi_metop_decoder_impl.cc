@@ -325,7 +325,7 @@ int viterbi_metop_decoder_impl::general_work(int noutput_items,
   if (ninputs % 2 == 0)
   {
     d_curr_is_even = true; //first bit in next processed input syms paket will be even.
-                           // printf("Viterbi decoder :Data chunk is EVEN \n" );
+                           // //printf("Viterbi decoder :Data chunk is EVEN \n" );
   }
   else
   {
@@ -344,7 +344,7 @@ int viterbi_metop_decoder_impl::general_work(int noutput_items,
     {
       phase_move_two(st, TestBitsLen, input_symbols_buffer_I, input_symbols_buffer_Q, input_symbols_buffer_I_ph, input_symbols_buffer_Q_ph);
       d_ber[0][st] = ber_calc1(d_00_st0, d_00_st1, TestBitsLen, input_symbols_buffer_I_ph, input_symbols_buffer_Q_ph);
-      printf("Viterbi decoder :noshift  PH%i:  d_ber %4f  \n", st, d_ber[0][st]);
+      //printf("Viterbi decoder :noshift  PH%i:  d_ber %4f  \n", st, d_ber[0][st]);
     }
 
     if (d_ber[0][0] < d_ber_threshold)
@@ -364,7 +364,7 @@ int viterbi_metop_decoder_impl::general_work(int noutput_items,
       {
         phase_move_two(st, TestBitsLen, input_symbols_buffer_I, input_symbols_buffer_Q, input_symbols_buffer_I_ph, input_symbols_buffer_Q_ph);
         d_ber[1][st] = ber_calc1(d_00_st0, d_00_st1, TestBitsLen, input_symbols_buffer_I_ph + 1, input_symbols_buffer_Q_ph + 1);
-        printf("Viterbi decoder : shifted PH%i:  d_ber %4f  \n", st, d_ber[1][st]);
+        //printf("Viterbi decoder : shifted PH%i:  d_ber %4f  \n", st, d_ber[1][st]);
       }
       if (d_ber[1][0] < d_ber_threshold)
       {
@@ -380,14 +380,14 @@ int viterbi_metop_decoder_impl::general_work(int noutput_items,
       else
       {
         d_valid_ber_found = false;
-        printf("Viterbi decoder : ST_IDLE: NO VALID BER found,  waiting for next  paket of symbols\n");
+        //printf("Viterbi decoder : ST_IDLE: NO VALID BER found,  waiting for next  paket of symbols\n");
       }
     }
 
     if (d_valid_ber_found == true)
     {
-      printf("Viterbi decoder : ST_IDLE: switch to next state >> enter_syncing()\n");
-      printf("Viterbi decoder : d_phase = %i, d_shift = %i\n", d_phase, d_shift);
+      //printf("Viterbi decoder : ST_IDLE: switch to next state >> enter_syncing()\n");
+      //printf("Viterbi decoder : d_phase = %i, d_shift = %i\n", d_phase, d_shift);
       enter_syncing();
     }
 
@@ -408,11 +408,11 @@ int viterbi_metop_decoder_impl::general_work(int noutput_items,
     if (d_ber[0][0] < d_ber_threshold)
     {
       d_valid_packet_count++;
-      printf("Viterbi decoder : ST_SYNCING: PACKET %i BER = %4f < d_ber_threshold %4f \n", d_valid_packet_count, d_ber[0][0], d_ber_threshold);
+      //printf("Viterbi decoder : ST_SYNCING: PACKET %i BER = %4f < d_ber_threshold %4f \n", d_valid_packet_count, d_ber[0][0], d_ber_threshold);
 
       if (d_valid_packet_count == d_insync_after)
       {
-        printf("Viterbi decoder : ST_SYNCING: switch to next state >> enter_synced()\n");
+        //printf("Viterbi decoder : ST_SYNCING: switch to next state >> enter_synced()\n");
         enter_synced();
         //data shift +1 determine - for main decoder
         if (d_shift == 0)
@@ -438,7 +438,7 @@ int viterbi_metop_decoder_impl::general_work(int noutput_items,
           }
         }
 
-        printf("Viterbi decoder : d_phase = %i, d_shift_main_decoder = %i\n", d_phase, d_shift_main_decoder);
+        //printf("Viterbi decoder : d_phase = %i, d_shift_main_decoder = %i\n", d_phase, d_shift_main_decoder);
       }
     }
     else
@@ -466,10 +466,10 @@ int viterbi_metop_decoder_impl::general_work(int noutput_items,
       if (d_ber[0][0] > d_ber_threshold)
       {
         d_invalid_packet_count++;
-        printf("Viterbi decoder : ST_SYNCED: Chunk Nr %i BER = %4f and exceed d_ber_threshold = %4f \n", d_invalid_packet_count, d_ber[0][0], d_ber_threshold);
+        //printf("Viterbi decoder : ST_SYNCED: Chunk Nr %i BER = %4f and exceed d_ber_threshold = %4f \n", d_invalid_packet_count, d_ber[0][0], d_ber_threshold);
         if (d_invalid_packet_count > d_outsync_after)
         {
-          printf("Viterbi decoder : ST_SYNCED: switch to ST_IDLE >> enter_idle()\n");
+          //printf("Viterbi decoder : ST_SYNCED: switch to ST_IDLE >> enter_idle()\n");
           enter_idle();
         }
       }
