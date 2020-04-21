@@ -2,10 +2,14 @@ build:
   image: debian:sid
   stage: build
   before_script:
-    - apt-get update
-    - apt-get install -y build-essential cmake gnuradio-dev python3-dev swig libboost-dev
+    - apt-get update > /dev/null
+    - apt-get install -y build-essential cmake gnuradio-dev python3-dev swig libboost-dev > /dev/null
   script:
     - mkdir build
     - cd build
     - cmake ..
     - make -j4
+    - make package
+  artifacts:
+    paths: 
+      - build/*.deb

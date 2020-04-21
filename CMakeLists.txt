@@ -24,6 +24,7 @@
 cmake_minimum_required(VERSION 3.8)
 project(gr-hrpt CXX C)
 enable_testing()
+set(PROJECT_VERSION 1.0)
 
 # Install to PyBOMBS target prefix if defined
 if(DEFINED ENV{PYBOMBS_PREFIX})
@@ -173,3 +174,34 @@ add_subdirectory(grc)
 install(FILES cmake/Modules/hrptConfig.cmake
     DESTINATION ${CMAKE_MODULES_DIR}/hrpt
 )
+
+########################################################################
+# CPack configuration
+########################################################################
+
+option(CI_BUILD "Running on CI" OFF)
+set(CI_BUILD_NUMBER "Default" CACHE STRING "0")
+
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+
+if(LINUX) 
+    if(CI_BUILD)
+        set(VERSION "${PROJECT_VERSION}-${CI_BUILD_NUMBER}")
+    else()
+        set(VERSION "${PROJECT_VERSION}")
+    endif()
+    set(CPACK_PACKAGE_VERSION ${VERSION})
+    set(CPACK_GENERATOR "DEB")
+    set(CPACK_PACKAGE_NAME "gr-hrpt")
+    set(CPACK_PACKAGE_CONTACT "Aang23")
+    set(CPACK_PACKAGE_VENDOR "Altillimity")
+    set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "amd64")
+    set(CPACK_RPM_PACKAGE_ARCHITECTURE "amd64")
+    set(CPACK_PACKAGING_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+    set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}.${CMAKE_SYSTEM_PROCESSOR}")
+    set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+
+    include(CPack)
+endif()
