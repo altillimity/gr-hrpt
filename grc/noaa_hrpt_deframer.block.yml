@@ -12,6 +12,6 @@ outputs:
 
 templates:
     imports: import hrpt
-    make: hrpt.hrpt_deframer()
+    make: hrpt.noaa_hrpt_deframer()
 
 file_format: 1
