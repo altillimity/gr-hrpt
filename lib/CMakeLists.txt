@@ -31,6 +31,8 @@ list(APPEND hrpt_sources
     viterbi_lib/metrics.c
     viterbi_lib/tab.c
     viterbi_lib/viterbi.c
+    viterbi_metop_decoder_impl.cc
+    metop_cadu_deframer_impl.cc
 )
 
 set(hrpt_sources "${hrpt_sources}" PARENT_SCOPE)

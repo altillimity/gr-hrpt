@@ -1,0 +1,58 @@
+id: metop_cadu_deframer
+label: MetOp CADU Deframer
+category: '[HRPT]/MetOp'
+
+parameters:
+-   id: sync_check
+    label: Sync check
+    dtype: bool
+    default: True
+    options: [True, False]
+-   id: frame_length
+    label: Length of frame
+    dtype: int
+    default: '1024'
+    options: ['1024']
+-   id: insync_after
+    label: In sync after
+    dtype: int
+    default: '5'
+    options: ['5', '10']
+-   id: outsync_after
+    label: Out of sync after
+    dtype: int
+    options: ['20', '40']
+
+inputs:
+-   domain: stream
+    dtype: byte
+
+outputs:
+-   domain: stream
+    dtype: byte
+
+templates:
+    imports: import hrpt
+    make: hrpt.metop_cadu_deframer(${sync_check}, ${frame_length}, ${insync_after}, ${outsync_after})
+
+documentation: |-
+    MetOp AHRPT soft input convolutional decoder using VITERBI algorithm, rate 3/4, k=7, punctured code.
+    It work as continuous decoder without reseting if synced.
+ 
+    Input's are complex symbols from QPSK demodulator (clock recovered symbols!).
+
+ 
+    Sync check : 
+    True >> check decoded data BER during decoding
+    False >> don't check
+
+    BER threshold : 
+    Threshold BER value
+
+    In sync after :
+    Sync decoder status is set after this number of valid BER's on processing data
+
+    Out of sync after :
+    Out of sync decoder status is set after this number of invalid BER's on processing data
+
+file_format: 1
