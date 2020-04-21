@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "noaa_hrpt_pll_cf.h": "c",
+        "cstdio": "cpp",
+        "cstring": "cpp"
+    }
+}

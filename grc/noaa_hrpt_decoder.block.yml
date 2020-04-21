@@ -1,6 +1,6 @@
 id: noaa_hrpt_decoder
-label: HRPT Decoder
-category: '[Core]/NOAA'
+label: NOAA HRPT Decoder
+category: '[HRPT]/NOAA'
 
 parameters:
 -   id: verbose
@@ -15,7 +15,7 @@ inputs:
     dtype: short
 
 templates:
-    imports: from gnuradio import noaa
-    make: noaa.hrpt_decoder(${verbose},${output})
+    imports: import hrpt
+    make: hrpt.hrpt_decoder(${verbose},${output})
 
 file_format: 1

@@ -19,48 +19,18 @@
 # Boston, MA 02110-1301, USA.
 
 ########################################################################
-# Check if there is C++ code at all
+# Setup dependencies
 ########################################################################
-if(NOT hrpt_sources)
-    MESSAGE(STATUS "No C++ sources... skipping swig/")
-    return()
-endif(NOT hrpt_sources)
+find_package(Doxygen)
 
 ########################################################################
-# Include swig generation macros
+# Begin conditional configuration
 ########################################################################
-find_package(SWIG)
-find_package(PythonLibs)
-if(NOT SWIG_FOUND OR NOT PYTHONLIBS_FOUND)
-    return()
-endif()
-include(GrSwig)
-include(GrPython)
+if(ENABLE_DOXYGEN)
 
 ########################################################################
-# Setup swig generation
+# Add subdirectories
 ########################################################################
-set(GR_SWIG_INCLUDE_DIRS $<TARGET_PROPERTY:gnuradio::runtime_swig,INTERFACE_INCLUDE_DIRECTORIES>)
-set(GR_SWIG_TARGET_DEPS gnuradio::runtime_swig)
+add_subdirectory(doxygen)
 
-set(GR_SWIG_LIBRARIES gnuradio-hrpt)
-
-set(GR_SWIG_DOC_FILE ${CMAKE_CURRENT_BINARY_DIR}/hrpt_swig_doc.i)
-set(GR_SWIG_DOC_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/../include)
-
-GR_SWIG_MAKE(hrpt_swig hrpt_swig.i)
-
-########################################################################
-# Install the build swig module
-########################################################################
-GR_SWIG_INSTALL(TARGETS hrpt_swig DESTINATION ${GR_PYTHON_DIR}/hrpt)
-
-########################################################################
-# Install swig .i files for development
-########################################################################
-install(
-    FILES
-    hrpt_swig.i
-    ${CMAKE_CURRENT_BINARY_DIR}/hrpt_swig_doc.i
-    DESTINATION ${GR_INCLUDE_DIR}/hrpt/swig
-)
+endif(ENABLE_DOXYGEN)

@@ -19,48 +19,26 @@
 # Boston, MA 02110-1301, USA.
 
 ########################################################################
-# Check if there is C++ code at all
+# Include python install macros
 ########################################################################
-if(NOT hrpt_sources)
-    MESSAGE(STATUS "No C++ sources... skipping swig/")
-    return()
-endif(NOT hrpt_sources)
-
-########################################################################
-# Include swig generation macros
-########################################################################
-find_package(SWIG)
-find_package(PythonLibs)
-if(NOT SWIG_FOUND OR NOT PYTHONLIBS_FOUND)
+include(GrPython)
+if(NOT PYTHONINTERP_FOUND)
     return()
 endif()
-include(GrSwig)
-include(GrPython)
 
 ########################################################################
-# Setup swig generation
+# Install python sources
 ########################################################################
-set(GR_SWIG_INCLUDE_DIRS $<TARGET_PROPERTY:gnuradio::runtime_swig,INTERFACE_INCLUDE_DIRECTORIES>)
-set(GR_SWIG_TARGET_DEPS gnuradio::runtime_swig)
-
-set(GR_SWIG_LIBRARIES gnuradio-hrpt)
-
-set(GR_SWIG_DOC_FILE ${CMAKE_CURRENT_BINARY_DIR}/hrpt_swig_doc.i)
-set(GR_SWIG_DOC_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/../include)
-
-GR_SWIG_MAKE(hrpt_swig hrpt_swig.i)
-
-########################################################################
-# Install the build swig module
-########################################################################
-GR_SWIG_INSTALL(TARGETS hrpt_swig DESTINATION ${GR_PYTHON_DIR}/hrpt)
-
-########################################################################
-# Install swig .i files for development
-########################################################################
-install(
+GR_PYTHON_INSTALL(
     FILES
-    hrpt_swig.i
-    ${CMAKE_CURRENT_BINARY_DIR}/hrpt_swig_doc.i
-    DESTINATION ${GR_INCLUDE_DIR}/hrpt/swig
+    __init__.py
+    DESTINATION ${GR_PYTHON_DIR}/hrpt
 )
+
+########################################################################
+# Handle the unit tests
+########################################################################
+include(GrTest)
+
+set(GR_TEST_TARGET_DEPS gnuradio-hrpt)
+set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)

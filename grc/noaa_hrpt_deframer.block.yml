@@ -1,6 +1,6 @@
 id: noaa_hrpt_deframer
-label: HRPT Deframer
-category: '[Core]/NOAA'
+label: NOAA HRPT Deframer
+category: '[HRPT]/NOAA'
 
 inputs:
 -   domain: stream
@@ -11,7 +11,7 @@ outputs:
     dtype: short
 
 templates:
-    imports: from gnuradio import noaa
-    make: noaa.hrpt_deframer()
+    imports: import hrpt
+    make: hrpt.hrpt_deframer()
 
 file_format: 1

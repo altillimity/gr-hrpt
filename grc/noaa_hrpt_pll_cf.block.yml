@@ -1,6 +1,6 @@
 id: noaa_hrpt_pll_cf
-label: HRPT PLL
-category: '[Core]/NOAA'
+label: NOAA HRPT PLL
+category: '[HRPT]/NOAA'
 
 parameters:
 -   id: alpha
@@ -22,7 +22,7 @@ outputs:
     dtype: float
 
 templates:
-    imports: from gnuradio import noaa
-    make: noaa.hrpt_pll_cf(${alpha}, ${beta}, ${max_offset})
+    imports: import hrpt
+    make: hrpt.noaa_hrpt_pll_cf(${alpha}, ${beta}, ${max_offset})
 
 file_format: 1
