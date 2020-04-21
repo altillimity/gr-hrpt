@@ -27,6 +27,10 @@ list(APPEND hrpt_sources
     noaa_hrpt_pll_cf_impl.cc
     noaa_hrpt_deframer_impl.cc
     noaa_hrpt_decoder_impl.cc
+    viterbi_fengyun_decoder_impl.cc
+    viterbi_lib/metrics.c
+    viterbi_lib/tab.c
+    viterbi_lib/viterbi.c
 )
 
 set(hrpt_sources "${hrpt_sources}" PARENT_SCOPE)

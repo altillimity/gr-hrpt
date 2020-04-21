@@ -11,6 +11,7 @@
     #include "hrpt/noaa_hrpt_pll_cf.h"
     #include "hrpt/noaa_hrpt_deframer.h"
     #include "hrpt/noaa_hrpt_decoder.h"
+    #include "hrpt/viterbi_fengyun_decoder.h"
 %}
 
 %include "hrpt/noaa_hrpt_pll_cf.h"
@@ -21,3 +22,6 @@ GR_SWIG_BLOCK_MAGIC2(hrpt, noaa_hrpt_deframer);
 
 %include "hrpt/noaa_hrpt_decoder.h"
 GR_SWIG_BLOCK_MAGIC2(hrpt, noaa_hrpt_decoder);
+
+%include "hrpt/viterbi_fengyun_decoder.h"
+GR_SWIG_BLOCK_MAGIC2(hrpt, viterbi_fengyun_decoder);

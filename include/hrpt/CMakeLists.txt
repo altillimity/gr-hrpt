@@ -27,5 +27,5 @@ install(FILES
     noaa_hrpt_pll_cf.h
     noaa_hrpt_deframer.h
     noaa_hrpt_decoder.h
-    DESTINATION include/hrpt
+    viterbi_fengyun_decoder.h DESTINATION include/hrpt
 )

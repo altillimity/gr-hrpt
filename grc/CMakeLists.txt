@@ -22,5 +22,6 @@ install(FILES
     noaa_hrpt_pll_cf.block.yml
     noaa_hrpt_deframer.block.yml
     noaa_hrpt_decoder.block.yml
+    hrpt_viterbi_fengyun_decoder.block.yml 
     DESTINATION share/gnuradio/grc/blocks
 )
