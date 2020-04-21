@@ -68,7 +68,7 @@ metop_cadu_deframer_impl::~metop_cadu_deframer_impl()
 
 void metop_cadu_deframer_impl::forecast(int noutput_items, gr_vector_int &ninput_items_required)
 {
-  /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
+  ninput_items_required[0] = noutput_items;
 }
 
 void metop_cadu_deframer_impl::enter_idle()
@@ -144,7 +144,7 @@ int metop_cadu_deframer_impl::general_work(int noutput_items,
         d_negative = false;
         printf("Deframer : BIT INVERSION ISN'T ACTIVE \n");
         d_sync_marker_count++;
-        //printf("Deframer : STATE %i , %i SYNC MARKER FOUND after %i bits \n",d_state, d_sync_marker_count,  d_item_count);
+        printf("Deframer : STATE %i , %i SYNC MARKER FOUND after %i bits \n",d_state, d_sync_marker_count,  d_item_count);
         if (d_sync_marker_count == d_insync_after)
         {
           enter_synced();
@@ -162,7 +162,7 @@ int metop_cadu_deframer_impl::general_work(int noutput_items,
         d_negative = true;
         printf("Deframer : BIT INVERSION ACTIVE \n");
         d_sync_marker_count++;
-        //printf("Deframer : STATE %i , %i SYNC MARKER FOUND after %i bits \n",d_state, d_sync_marker_count,  d_item_count);
+        printf("Deframer : STATE %i , %i SYNC MARKER FOUND after %i bits \n",d_state, d_sync_marker_count,  d_item_count);
         if (d_sync_marker_count == d_insync_after)
         {
           enter_synced();
@@ -186,7 +186,7 @@ int metop_cadu_deframer_impl::general_work(int noutput_items,
         if (d_shifter == ASM)
         {
           d_sync_marker_count++;
-          //printf("Deframer : STATE %i , Sync marker nr %i found \n", d_state, d_sync_marker_count);
+          printf("Deframer : STATE %i , Sync marker nr %i found \n", d_state, d_sync_marker_count);
           d_item_count = 0;
           if (d_sync_marker_count == d_insync_after)
           {
@@ -200,7 +200,7 @@ int metop_cadu_deframer_impl::general_work(int noutput_items,
         }
         else
         {
-          //printf("Deframer : STATE %i , SYNC marker %i not present or invalid \n", d_state, d_sync_marker_count );
+          printf("Deframer : STATE %i , SYNC marker %i not present or invalid \n", d_state, d_sync_marker_count );
           printf("Deframer : ENTER IDLE STATE from syncing state \n");
           enter_idle();
         }
@@ -208,7 +208,7 @@ int metop_cadu_deframer_impl::general_work(int noutput_items,
       break;
 
     case ST_SYNCED:
-      //printf("bit count %i,   word count %i \n",d_bit_count, d_word_count);
+      printf("bit count %i,   word count %i \n",d_bit_count, d_word_count);
       d_word = (d_word << 1) | bit;
       if (--d_bit_count == 0)
       {
@@ -219,12 +219,12 @@ int metop_cadu_deframer_impl::general_work(int noutput_items,
         {
           if (d_sync_check)
           {
-            //printf("Deframer : ST SYNCED , ENTER CHECK SYNC STATE \n");
+            printf("Deframer : ST SYNCED , ENTER CHECK SYNC STATE \n");
             enter_checksync();
           }
           else
           {
-            //printf("Deframer : ST SYNCED , ENTER STAY SYNCED STATE \n");
+            printf("Deframer : ST SYNCED , ENTER STAY SYNCED STATE \n");
             enter_staysynced();
             d_word_count = d_frame_length;
           }
@@ -240,13 +240,13 @@ int metop_cadu_deframer_impl::general_work(int noutput_items,
         d_item_count = 0;
         if (d_shifter == ASM)
         {
-          //printf("Deframer : STATE %i , CHECK SYNC, SYNC MARKER VALID\n", d_state);
+          printf("Deframer : STATE %i , CHECK SYNC, SYNC MARKER VALID\n", d_state);
           d_nosync_marker_count = 0;
           out[j++] = ASM1;
           out[j++] = ASM2;
           out[j++] = ASM3;
           out[j++] = ASM4;
-          //printf("Deframer : ST CHECK SYNC , ENTER STAY SYNCED STATE \n");
+          printf("Deframer : ST CHECK SYNC , ENTER STAY SYNCED STATE \n");
           enter_staysynced();
         }
 
@@ -265,7 +265,7 @@ int metop_cadu_deframer_impl::general_work(int noutput_items,
             out[j++] = ASM3;
             out[j++] = ASM4;
             enter_staysynced();
-            //printf("STATE %i , CHECK SYNC, SYNC MARKER %i from max %i is INVALID !!!!!!!\n", d_state, d_nosync_marker_count, d_outsync_after );
+            printf("STATE %i , CHECK SYNC, SYNC MARKER %i from max %i is INVALID !!!!!!!\n", d_state, d_nosync_marker_count, d_outsync_after );
           }
         }
       }
