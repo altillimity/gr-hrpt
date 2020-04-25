@@ -16,6 +16,6 @@ inputs:
 
 templates:
     imports: import hrpt
-    make: hrpt.hrpt_decoder(${verbose},${output})
+    make: hrpt.noaa_hrpt_decoder(${verbose},${output})
 
 file_format: 1
