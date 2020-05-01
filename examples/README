@@ -1,7 +1,0 @@
-Here are provided a few example that uses this modules, to decode NOAA, METEOR, MetOp and FengYun HRPT downlinks.
-
-Huge thanks to Peter! Original link : https://tynet.eu/hrpt/gnuradio-decoders
-
-The flowcharts here are based on those.
-
-Offline flowcharts comes in two variants. One to be used with SDR# baseband files, and the other with GQRX baseband.
