@@ -4,6 +4,10 @@ HRPT Blocks from gr-noaa and others ported to GNU Radio 3.8+
 
 Currently blocks from gr-noaa were kept in their original form for compatbility with older flowcharts. This may change.
 
+## Examples
+
+Several usage example can be found in the [examples](https://github.com/altillimity/gr-hrpt/tree/master/examples) directory included in this repo. This includes flowcharts used for decoding NOAA, METEOR, MetOp and FengYun-3 (soon) HRPT downlinks. Data generated has to be processed by softwares such as [MetFy3x](http://www.sat.cc.ua/page5.html), [HRPT Reader](https://www.satsignal.eu/software/hrpt.htm), [weathersat](https://github.com/rocketscientist-fred/weathersat), my [quite WIP decoder](https://gitlab.altillimity.com/altillimity/hrpt-decoder) or anything else that can do so.
+
 ## Building
 
 Make sure you have swig, cmake, boost, python and gnuradio installed.
