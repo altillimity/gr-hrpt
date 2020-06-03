@@ -33,6 +33,7 @@ list(APPEND hrpt_sources
     viterbi_metop_decoder_impl.cc
     viterbi_fengyun_decoder_impl.cc
     metop_cadu_deframer_impl.cc
+    fengyun_diff_decoder_impl.cc
 )
 
 set(hrpt_sources "${hrpt_sources}" PARENT_SCOPE)

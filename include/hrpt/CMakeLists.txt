@@ -29,6 +29,6 @@ install(FILES
     noaa_hrpt_decoder.h
     viterbi_fengyun_decoder.h
     viterbi_metop_decoder.h
-    metop_cadu_deframer.h 
-    DESTINATION include/hrpt
+    metop_cadu_deframer.h
+    fengyun_diff_decoder.h DESTINATION include/hrpt
 )

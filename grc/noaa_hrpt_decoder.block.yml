@@ -1,18 +1,18 @@
 id: noaa_hrpt_decoder
 label: NOAA HRPT Decoder
-category: '[HRPT]/NOAA'
+category: "[HRPT]/NOAA"
 
 parameters:
--   id: verbose
-    label: Verbose
-    dtype: bool
--   id: output
-    label: Output Files
-    dtype: bool
+    - id: verbose
+      label: Verbose
+      dtype: bool
+    - id: output
+      label: Output Files
+      dtype: bool
 
 inputs:
--   domain: stream
-    dtype: short
+    - domain: stream
+      dtype: short
 
 templates:
     imports: import hrpt

@@ -1,14 +1,14 @@
 id: noaa_hrpt_deframer
 label: NOAA HRPT Deframer
-category: '[HRPT]/NOAA'
+category: "[HRPT]/NOAA"
 
 inputs:
--   domain: stream
-    dtype: byte
+    - domain: stream
+      dtype: byte
 
 outputs:
--   domain: stream
-    dtype: short
+    - domain: stream
+      dtype: short
 
 templates:
     imports: import hrpt

@@ -1,40 +1,40 @@
 id: viterbi_metop_decoder
 label: MetOp Viterbi decoder
-category: '[HRPT]/MetOp'
+category: "[HRPT]/MetOp"
 
 parameters:
--   id: sync_check
-    label: Sync check
-    dtype: bool
-    default: True
-    options: [True, False]
--   id: ber_threshold
-    label: BER threshold
-    dtype: real
-    default: '0.100'
-    options: ['0.100', '0.150', '0.220']
--   id: insync_after
-    label: In sync after
-    dtype: int
-    default: '5'
-    options: ['5', '10']
--   id: outsync_after
-    label: Out of sync after
-    dtype: int
-    options: ['20', '40']
--   id: reset_after
-    label: Reset decoder after
-    dtype: int
-    default: '50'
-    options: ['50', '100']
+    - id: sync_check
+      label: Sync check
+      dtype: bool
+      default: True
+      options: [True, False]
+    - id: ber_threshold
+      label: BER threshold
+      dtype: real
+      default: "0.100"
+      options: ["0.100", "0.150", "0.220"]
+    - id: insync_after
+      label: In sync after
+      dtype: int
+      default: "5"
+      options: ["5", "10"]
+    - id: outsync_after
+      label: Out of sync after
+      dtype: int
+      options: ["20", "40"]
+    - id: reset_after
+      label: Reset decoder after
+      dtype: int
+      default: "50"
+      options: ["50", "100"]
 
 inputs:
--   domain: stream
-    dtype: complex
+    - domain: stream
+      dtype: complex
 
 outputs:
--   domain: stream
-    dtype: byte
+    - domain: stream
+      dtype: byte
 
 templates:
     imports: import hrpt
@@ -43,10 +43,10 @@ templates:
 documentation: |-
     MetOp AHRPT soft input convolutional decoder using VITERBI algorithm, rate 3/4, k=7, punctured code.
     It work as continuous decoder without reseting if synced.
- 
+
     Input's are complex symbols from QPSK demodulator (clock recovered symbols!).
 
- 
+
     Sync check : 
     True >> check decoded data BER during decoding
     False >> don't check

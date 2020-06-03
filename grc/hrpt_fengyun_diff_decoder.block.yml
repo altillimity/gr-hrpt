@@ -1,0 +1,17 @@
+id: hrpt_fengyun_diff_decoder
+label: Fengyun Differential Decoder
+category: "[HRPT]/FengYun"
+
+inputs:
+  - domain: stream
+    dtype: byte
+
+outputs:
+  - domain: stream
+    dtype: byte
+
+templates:
+  imports: import hrpt
+  make: hrpt.fengyun_diff_decoder()
+
+file_format: 1
